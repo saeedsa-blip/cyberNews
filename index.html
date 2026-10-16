@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<title>رادار التهديدات الأسبوعي</title>
+<title>راصد التهديدات الأسبوعي</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="نشرة يومية لأبرز الأحداث السيبرانية المحلية والإقليمية والعالمية">
@@ -11,7 +11,7 @@
 /* Layout: single report column — events (local, regional, global), trends table, sources table, four charts. Single white-and-gold theme by request. */
 :root{
   --bg:#ffffff; --paper:#fbf9f3; --ink:#1d1a13; --muted:#6b6455; --line:#ece5d3;
-  --gold:#b8902f; --gold-deep:#8a6a1c; --gold-soft:#f6efdc; --navy:#1f2a44; --on-gold:#ffffff;
+  --gold:#b8902f; --gold-deep:#8a6a1c; --gold-soft:#f6efdc; --navy:#1f2a44; --on-gold:#ffffff; --band:#a8822a; --on-band:#ffffff;
   --p1:#1f2a44; --p2:#b8902f; --p3:#8a6a1c; --p4:#5b6b8c; --p5:#d9bf7a; --p6:#c9c2b1;
   --crit:#b3261e; --crit-bg:#fbeaea; --high:#a85a00; --high-bg:#fcf0e0; --med:#6f6200; --med-bg:#f7f3da; --low:#2b6f45; --low-bg:#e6f2ea;
   --f-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
@@ -21,7 +21,7 @@
 }
 :root[data-mode="dark"]{
   --bg:#14130f; --paper:#1c1a15; --ink:#efe9da; --muted:#a59d8a; --line:#332f25;
-  --gold:#d4ad4f; --gold-deep:#e2c06a; --gold-soft:#2c2615; --navy:#dfe5f5; --on-gold:#1a160c;
+  --gold:#d4ad4f; --gold-deep:#e2c06a; --gold-soft:#2c2615; --navy:#dfe5f5; --on-gold:#1a160c; --band:#d4ad4f; --on-band:#1a160c;
   --crit:#ff8f86; --crit-bg:#3a1d1a; --high:#f5ad5c; --high-bg:#3a2a17; --med:#e3d36b; --med-bg:#33301a; --low:#84d3a2; --low-bg:#1b3124;
   --p1:#8fa3d6; --p2:#d4ad4f; --p3:#a07a24; --p4:#6f7fa3; --p5:#f0d999; --p6:#5a5446;
   color-scheme:dark }
@@ -51,9 +51,11 @@ nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-size:13.5px;fo
 nav.tabs a:hover,nav.tabs a:focus-visible{color:var(--gold-deep);border-color:var(--gold);outline:none}
 
 section{padding-top:34px;scroll-margin-top:60px}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
-h2{font-family:var(--f-display);font-weight:500;font-size:21px;margin:0;display:flex;align-items:center;gap:10px}
-h2::before{content:"";width:10px;height:10px;background:var(--gold);transform:rotate(45deg);flex:none}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap;background:var(--band);color:var(--on-band);border-radius:8px;padding:10px 16px}
+h2{font-family:var(--f-display);font-weight:500;font-size:19px;margin:0;color:inherit;text-wrap:balance}
+.sec-head .count{color:var(--on-band);background:rgba(255,255,255,.22);padding:2px 10px;border-radius:999px;font-size:12.5px}
+.sec-head .count:empty{display:none}
+:root[data-mode="dark"] .sec-head .count{background:rgba(0,0,0,.18)}
 .count{font-size:13px;color:var(--muted)}
 
 .items{display:flex;flex-direction:column;border-top:1px solid var(--line)}
@@ -158,7 +160,7 @@ h3 a:hover,h3 a:focus-visible{color:var(--gold-deep);text-decoration:underline;o
 <div class="wrap" dir="rtl" lang="ar">
   <header class="top">
     <div class="eyebrow"><span class="demo">نشرة أسبوعية</span><span id="updated"></span><button type="button" class="mode" id="mode" aria-pressed="false"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span id="modetxt">الوضع الداكن</span></button></div>
-    <h1>رادار التهديدات <span>الأسبوعي</span></h1>
+    <h1>راصد التهديدات <span>الأسبوعي</span></h1>
     <div class="week" id="week"></div>
   </header>
 
@@ -253,6 +255,7 @@ const excluded=i=>S.ex.links.includes(i.link)||S.ex.keywords.some(k=>k&&(i.title
 const getJSON=async u=>{const r=await fetch(u,{cache:"no-cache"});if(!r.ok)throw new Error(u);return r.json()};
 const mergeNews=items=>{const m=new Map(S.news.map(i=>[i.id,i]));items.forEach(i=>m.set(i.id,i));S.news=[...m.values()].sort((a,b)=>b.date.localeCompare(a.date));};
 
+const TAG_AR={"Zero-day":"ثغرة يوم الصفر","Ransomware":"فدية","Supply chain":"سلسلة التوريد","APT":"تجسس متقدم","DDoS":"حجب خدمة","AI":"ذكاء اصطناعي","Malware":"برمجيات خبيثة"};
 const SEV={critical:["c","حرج",0],high:["h","مرتفع",1],medium:["m","متوسط",2],low:["l","منخفض",3]};
 const RATING={"مرتفع جداً":"c","مرتفع":"h","متوسط":"m","منخفض":"l"};
 const COUNTRY={"united arab emirates":"الإمارات","saudi arabia":"السعودية","qatar":"قطر","kuwait":"الكويت","bahrain":"البحرين","oman":"عُمان","united states of america":"الولايات المتحدة","united states":"الولايات المتحدة","united kingdom of great britain and northern ireland":"المملكة المتحدة","united kingdom":"المملكة المتحدة","germany":"ألمانيا","france":"فرنسا","india":"الهند","china":"الصين","russian federation":"روسيا","russia":"روسيا","israel":"إسرائيل","iran, islamic republic of":"إيران","iran":"إيران","japan":"اليابان","korea, republic of":"كوريا الجنوبية","south korea":"كوريا الجنوبية","ukraine":"أوكرانيا","turkey":"تركيا","türkiye":"تركيا","egypt":"مصر","jordan":"الأردن","iraq":"العراق","brazil":"البرازيل","canada":"كندا","australia":"أستراليا","italy":"إيطاليا","spain":"إسبانيا","taiwan":"تايوان","taiwan, province of china":"تايوان","pakistan":"باكستان","singapore":"سنغافورة","netherlands":"هولندا","poland":"بولندا","mexico":"المكسيك","indonesia":"إندونيسيا","vietnam":"فيتنام","viet nam":"فيتنام"};
@@ -261,7 +264,7 @@ const METHOD=[
   ["التصيّد الاحتيالي",["T1566","T1598"],/phish|spearphish|smish/],
   ["برامج الفدية",["T1486","T1490"],/ransom/],
   ["استغلال الثغرات",["T1190","T1203","T1068","T1210","T1211","T1212"],/cve-|exploit|vulnerab/],
-  ["DDoS",["T1498","T1499"],/ddos|denial/],
+  ["حجب الخدمة (DDoS)",["T1498","T1499"],/ddos|denial/],
   ["سرقة بيانات الدخول",["T1078","T1110","T1003","T1555","T1056","T1552"],/stealer|credential|password/],
   ["سلسلة التوريد",["T1195"],/supply.?chain/],
   ["برمجيات خبيثة أخرى",["T1105","T1059","T1547","T1053"],/backdoor|\brat\b|trojan|loader|malware|botnet/]];
@@ -296,7 +299,7 @@ function render(){
     sec.querySelector(".count").textContent=list.length?`${list.length} ${list.length===1?"حدث":list.length===2?"حدثان":list.length<11?"أحداث":"حدثاً"}`:"";
     const shown=expanded[scope]?list:list.slice(0,LIMIT);
     sec.querySelector(".items").innerHTML=list.length?shown.map(i=>{const [c,label]=SEV[i.severity];const d=new Date(i.date);
-      return `<article><i class="sev ${c}"></i><div class="meta"><span class="pill ${c}">${label}</span>${i.tag?`<span class="tag">${esc(i.tag)}</span>`:""}<span class="src">${esc(i.source)}</span><span>${d.getDate()} ${MONTHS[d.getMonth()]}</span></div><h3 dir="auto"><a href="${esc(safeUrl(i.link))}" target="_blank" rel="noopener">${esc(i.title)}</a></h3>${i.summary?`<p dir="auto">${esc(i.summary)}</p>`:"<span></span>"}</article>`}).join("")
+      return `<article><i class="sev ${c}"></i><div class="meta"><span class="pill ${c}">${label}</span>${i.tag?`<span class="tag">${esc(TAG_AR[i.tag]||i.tag)}</span>`:""}<span class="src">${esc(i.source)}</span><span>${d.getDate()} ${MONTHS[d.getMonth()]}</span></div><h3 dir="auto"><a href="${esc(safeUrl(i.link))}" target="_blank" rel="noopener">${esc(i.title_ar||i.title)}</a></h3>${(i.summary_ar||i.summary)?`<p dir="auto">${esc(i.summary_ar||i.summary)}</p>`:"<span></span>"}</article>`}).join("")
       +(list.length>LIMIT?`<div><button type="button" class="more" data-scope="${scope}">${expanded[scope]?"عرض أقل":`عرض الكل (${list.length})`}</button></div>`:"")
       :'<p class="empty">لا توجد أحداث في الفترة المختارة.</p>';
   });
