@@ -12,7 +12,7 @@
     },
     {
       "name": "CISA",
-      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "url": "url": "https://news.google.com/rss/search?q=site:cisa.gov+(advisory+OR+vulnerability+OR+exploited)&hl=en&gl=US&ceid=US:en",
       "site": "https://www.cisa.gov"
     },
     {
