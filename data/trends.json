@@ -1,0 +1,12 @@
+{
+  "note": "يُحدَّث يدوياً. التقييم: مرتفع جداً / مرتفع / متوسط / منخفض",
+  "updated": "2026-10-17",
+  "items": [
+    {"trend": "استخدام الذكاء الاصطناعي في تنفيذ الهجمات السيبرانية", "rating": "مرتفع جداً", "source": "Microsoft Threat Intelligence"},
+    {"trend": "هجمات الفدية مع الابتزاز المزدوج (تشفير + تسريب)", "rating": "مرتفع جداً", "source": "Check Point Research"},
+    {"trend": "استغلال ثغرات أجهزة الحافة (VPN و Firewall)", "rating": "مرتفع", "source": "CISA"},
+    {"trend": "هجمات سلسلة التوريد البرمجية", "rating": "مرتفع", "source": "ENISA"},
+    {"trend": "التصيّد عبر QR Code والرسائل النصية", "rating": "متوسط", "source": "Kaspersky Securelist"},
+    {"trend": "استهداف أنظمة التشغيل الصناعية (OT/ICS)", "rating": "متوسط", "source": "مجلس الأمن السيبراني الإماراتي"}
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "feeds": [
+    {
+      "name": "The Hacker News",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+      "site": "https://thehackernews.com"
+    },
+    {
+      "name": "BleepingComputer",
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "site": "https://www.bleepingcomputer.com"
+    },
+    {
+      "name": "CISA",
+      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "site": "https://www.cisa.gov"
+    },
+    {
+      "name": "Kaspersky Securelist",
+      "url": "https://securelist.com/feed/",
+      "site": "https://securelist.com"
+    },
+    {
+      "name": "Check Point Research",
+      "url": "https://research.checkpoint.com/feed/",
+      "site": "https://research.checkpoint.com"
+    },
+    {
+      "name": "Microsoft Security Blog",
+      "url": "https://www.microsoft.com/en-us/security/blog/feed/",
+      "site": "https://www.microsoft.com/en-us/security/blog"
+    },
+    {
+      "name": "Reuters",
+      "url": "https://news.google.com/rss/search?q=site:reuters.com+(cyber+OR+cybersecurity+OR+hackers+OR+ransomware)&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://www.reuters.com"
+    },
+    {
+      "name": "AP News",
+      "url": "https://news.google.com/rss/search?q=site:apnews.com+(cyber+OR+cybersecurity+OR+hackers+OR+ransomware)&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://apnews.com"
+    },
+    {
+      "name": "CrowdStrike",
+      "url": "https://news.google.com/rss/search?q=site:crowdstrike.com&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://www.crowdstrike.com/blog"
+    },
+    {
+      "name": "Anthropic",
+      "url": "https://news.google.com/rss/search?q=site:anthropic.com+(security+OR+threat+OR+misuse+OR+cyber)&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://www.anthropic.com/news"
+    },
+    {
+      "name": "GISEC",
+      "url": "https://news.google.com/rss/search?q=GISEC+(Dubai+OR+cybersecurity)&hl=en-AE&gl=AE&ceid=AE:en",
+      "site": "https://www.gisec.ae"
+    },
+    {
+      "name": "Google News – UAE",
+      "url": "https://news.google.com/rss/search?q=UAE+(cyber+OR+hackers+OR+ransomware+OR+phishing)&hl=en-AE&gl=AE&ceid=AE:en",
+      "site": "https://news.google.com"
+    },
+    {
+      "name": "Google News – Gulf",
+      "url": "https://news.google.com/rss/search?q=(Saudi+OR+Qatar+OR+Kuwait+OR+Bahrain+OR+Oman+OR+GCC)+cyber+attack&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://news.google.com"
+    },
+    {
+      "name": "Dark Reading",
+      "url": "https://www.darkreading.com/rss.xml",
+      "site": "https://www.darkreading.com"
+    },
+    {
+      "name": "SecurityWeek",
+      "url": "https://www.securityweek.com/feed/",
+      "site": "https://www.securityweek.com"
+    },
+    {
+      "name": "The Record",
+      "url": "https://therecord.media/feed",
+      "site": "https://therecord.media"
+    },
+    {
+      "name": "Krebs on Security",
+      "url": "https://krebsonsecurity.com/feed/",
+      "site": "https://krebsonsecurity.com"
+    },
+    {
+      "name": "SANS Internet Storm Center",
+      "url": "https://isc.sans.edu/rssfeed.xml",
+      "site": "https://isc.sans.edu"
+    },
+    {
+      "name": "وكالة أنباء الإمارات (وام)",
+      "url": "https://news.google.com/rss/search?q=site%3Awam.ae+%28cyber+OR+cybersecurity+OR+%D8%B3%D9%8A%D8%A8%D8%B1%D8%A7%D9%86%D9%8A%29&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://www.wam.ae"
+    },
+    {
+      "name": "The National",
+      "url": "https://news.google.com/rss/search?q=site%3Athenationalnews.com+%28cyber+OR+hackers+OR+ransomware+OR+phishing%29&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://www.thenationalnews.com"
+    },
+    {
+      "name": "Khaleej Times",
+      "url": "https://news.google.com/rss/search?q=site%3Akhaleejtimes.com+%28cyber+OR+hackers+OR+scam+OR+phishing%29&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://www.khaleejtimes.com"
+    },
+    {
+      "name": "Gulf News",
+      "url": "https://news.google.com/rss/search?q=site%3Agulfnews.com+%28cyber+OR+hackers+OR+scam+OR+phishing%29&hl=en&gl=AE&ceid=AE:en",
+      "site": "https://gulfnews.com"
+    },
+    {
+      "name": "أخبار قوقل – الإمارات (عربي)",
+      "url": "https://news.google.com/rss/search?q=%D8%A7%D9%84%D8%A3%D9%85%D9%86+%D8%A7%D9%84%D8%B3%D9%8A%D8%A8%D8%B1%D8%A7%D9%86%D9%8A+%D8%A7%D9%84%D8%A5%D9%85%D8%A7%D8%B1%D8%A7%D8%AA&hl=ar&gl=AE&ceid=AE:ar",
+      "site": "https://news.google.com"
+    },
+    {
+      "name": "أخبار قوقل – الخليج (عربي)",
+      "url": "https://news.google.com/rss/search?q=%D9%87%D8%AC%D9%88%D9%85+%D8%B3%D9%8A%D8%A8%D8%B1%D8%A7%D9%86%D9%8A+%28%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9+OR+%D9%82%D8%B7%D8%B1+OR+%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA+OR+%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86+OR+%D8%B9%D9%85%D8%A7%D9%86%29&hl=ar&gl=AE&ceid=AE:ar",
+      "site": "https://news.google.com"
+    }
+  ],
+  "references": [
+    {
+      "name": "مجلس الأمن السيبراني الإماراتي",
+      "site": "https://csc.gov.ae"
+    },
+    {
+      "name": "ENISA",
+      "site": "https://www.enisa.europa.eu"
+    },
+    {
+      "name": "AlienVault OTX (بيانات المؤشرات)",
+      "site": "https://otx.alienvault.com"
+    }
+  ],
+  "scope": {
+    "local": [
+      "uae",
+      "united arab emirates",
+      "emirati",
+      "emirates",
+      "dubai",
+      "abu dhabi",
+      "sharjah",
+      "al ain",
+      "ajman",
+      "fujairah",
+      "ras al khaimah",
+      "الإمارات",
+      "دبي",
+      "أبوظبي"
+    ],
+    "regional": [
+      "saudi",
+      "ksa",
+      "qatar",
+      "kuwait",
+      "bahrain",
+      "oman",
+      "gcc",
+      "gulf",
+      "middle east",
+      "mena",
+      "egypt",
+      "jordan",
+      "iraq",
+      "iran",
+      "iranian",
+      "israel",
+      "israeli",
+      "lebanon",
+      "syria",
+      "yemen",
+      "morocco",
+      "algeria",
+      "tunisia",
+      "libya",
+      "arab",
+      "السعودية",
+      "قطر",
+      "الكويت",
+      "البحرين",
+      "عمان",
+      "الخليج"
+    ]
+  },
+  "severity": {
+    "critical": [
+      "zero-day",
+      "0-day",
+      "zero day",
+      "actively exploited",
+      "under active exploitation",
+      "emergency",
+      "critical",
+      "cvss 10",
+      "cvss 9",
+      "wormable",
+      "kev",
+      "يوم الصفر",
+      "استغلال نشط",
+      "ثغرة حرجة",
+      "تحذير عاجل"
+    ],
+    "high": [
+      "ransomware",
+      "breach",
+      "data leak",
+      "rce",
+      "remote code execution",
+      "exploit",
+      "exploited",
+      "backdoor",
+      "apt",
+      "nation-state",
+      "ddos",
+      "supply chain",
+      "فدية",
+      "اختراق",
+      "تسريب",
+      "هجوم سيبراني"
+    ],
+    "medium": [
+      "phishing",
+      "scam",
+      "malware",
+      "stealer",
+      "trojan",
+      "vulnerability",
+      "flaw",
+      "botnet",
+      "fraud",
+      "تصيد",
+      "تصيّد",
+      "احتيال",
+      "برمجيات خبيثة",
+      "ثغرة"
+    ]
+  },
+  "tags": {
+    "Zero-day": [
+      "zero-day",
+      "0-day",
+      "zero day"
+    ],
+    "Ransomware": [
+      "ransomware",
+      "extortion",
+      "فدية"
+    ],
+    "Supply chain": [
+      "supply chain",
+      "npm",
+      "pypi",
+      "malicious package"
+    ],
+    "APT": [
+      "apt",
+      "nation-state",
+      "espionage",
+      "state-sponsored"
+    ],
+    "DDoS": [
+      "ddos",
+      "denial of service"
+    ],
+    "تسريب": [
+      "breach",
+      "data leak",
+      "leaked",
+      "exposed data",
+      "تسريب"
+    ],
+    "تصيّد": [
+      "phishing",
+      "smishing",
+      "scam",
+      "fraud",
+      "تصيد",
+      "تصيّد",
+      "احتيال"
+    ],
+    "AI": [
+      "ai",
+      "llm",
+      "prompt injection",
+      "deepfake",
+      "chatgpt",
+      "gemini",
+      "copilot"
+    ],
+    "ثغرة": [
+      "vulnerability",
+      "flaw",
+      "cve",
+      "patch",
+      "rce",
+      "ثغرة"
+    ],
+    "Malware": [
+      "malware",
+      "trojan",
+      "stealer",
+      "botnet",
+      "loader",
+      "backdoor",
+      "rat"
+    ]
+  }
+}

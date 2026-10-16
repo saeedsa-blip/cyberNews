@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<title>رادار التهديدات الأسبوعي</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="نشرة يومية لأبرز الأحداث السيبرانية المحلية والإقليمية والعالمية">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: single report column — events (local, regional, global), trends table, sources table, four charts. Single white-and-gold theme by request. */
+:root{
+  --bg:#ffffff; --paper:#fbf9f3; --ink:#1d1a13; --muted:#6b6455; --line:#ece5d3;
+  --gold:#b8902f; --gold-deep:#8a6a1c; --gold-soft:#f6efdc; --navy:#1f2a44; --on-gold:#ffffff;
+  --p1:#1f2a44; --p2:#b8902f; --p3:#8a6a1c; --p4:#5b6b8c; --p5:#d9bf7a; --p6:#c9c2b1;
+  --crit:#b3261e; --crit-bg:#fbeaea; --high:#a85a00; --high-bg:#fcf0e0; --med:#6f6200; --med-bg:#f7f3da; --low:#2b6f45; --low-bg:#e6f2ea;
+  --f-display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+:root[data-mode="dark"]{
+  --bg:#14130f; --paper:#1c1a15; --ink:#efe9da; --muted:#a59d8a; --line:#332f25;
+  --gold:#d4ad4f; --gold-deep:#e2c06a; --gold-soft:#2c2615; --navy:#dfe5f5; --on-gold:#1a160c;
+  --crit:#ff8f86; --crit-bg:#3a1d1a; --high:#f5ad5c; --high-bg:#3a2a17; --med:#e3d36b; --med-bg:#33301a; --low:#84d3a2; --low-bg:#1b3124;
+  --p1:#8fa3d6; --p2:#d4ad4f; --p3:#a07a24; --p4:#6f7fa3; --p5:#f0d999; --p6:#5a5446;
+  color-scheme:dark }
+.mode{margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12.5px;font-weight:600;color:var(--gold-deep);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+.mode:hover{border-color:var(--gold)}
+.mode:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mode svg{width:15px;height:15px}
+.mode .sun{display:none}
+:root[data-mode="dark"] .mode .sun{display:block}
+:root[data-mode="dark"] .mode .moon{display:none}
+:root[data-mode="dark"] .pop{box-shadow:0 12px 32px rgba(0,0,0,.5)}
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+
+header.top{display:flex;flex-direction:column;gap:6px;padding-bottom:22px;border-bottom:2px solid var(--gold);margin-bottom:6px}
+.eyebrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
+.demo{background:var(--gold-soft);color:var(--gold-deep);padding:2px 10px;border-radius:999px;font-weight:600}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,6vw,38px);line-height:1.25;margin:0;text-wrap:balance}
+h1 span{color:var(--gold)}
+.week{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;padding-block:10px;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:500;padding:5px 13px;border-radius:999px;border:1px solid var(--line)}
+nav.tabs a:hover,nav.tabs a:focus-visible{color:var(--gold-deep);border-color:var(--gold);outline:none}
+
+section{padding-top:34px;scroll-margin-top:60px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+h2{font-family:var(--f-display);font-weight:500;font-size:21px;margin:0;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:10px;height:10px;background:var(--gold);transform:rotate(45deg);flex:none}
+.count{font-size:13px;color:var(--muted)}
+
+.items{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+article{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:15px 0;border-bottom:1px solid var(--line)}
+.sev{grid-row:span 3;width:4px;border-radius:2px;align-self:stretch}
+.sev.c{background:var(--crit)}.sev.h{background:var(--high)}.sev.m{background:var(--med)}.sev.l{background:var(--low)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
+.pill{font-weight:600;padding:1px 9px;border-radius:999px;font-size:11.5px;white-space:nowrap}
+.pill.c{color:var(--crit);background:var(--crit-bg)}.pill.h{color:var(--high);background:var(--high-bg)}
+.pill.m{color:var(--med);background:var(--med-bg)}.pill.l{color:var(--low);background:var(--low-bg)}
+.tag{border:1px solid var(--line);padding:0 8px;border-radius:999px}
+h3{font-size:16px;font-weight:600;margin:0;line-height:1.5;text-wrap:balance}
+article p{margin:0;color:var(--muted);font-size:14px;min-width:0}
+
+.table-box{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+th{background:var(--gold-soft);color:var(--gold-deep);font-weight:600;text-align:right;padding:10px 14px;font-size:13px;border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td a{color:var(--gold-deep);font-family:var(--f-mono);font-size:12.5px;text-decoration:none;direction:ltr;unicode-bidi:isolate}
+td a:hover{text-decoration:underline}
+.note{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:700px){.charts{grid-template-columns:1fr}}
+.chart{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.chart h4{font-family:var(--f-display);font-weight:500;font-size:15px;margin:0;display:flex;gap:8px;align-items:baseline}
+.chart h4 b{font-family:var(--f-mono);color:var(--gold);font-weight:500}
+.rows{display:flex;flex-direction:column;gap:9px}
+.row{display:grid;grid-template-columns:minmax(80px,32%) 1fr 40px;gap:10px;align-items:center;font-size:13.5px}
+.row .name{min-width:0;overflow-wrap:anywhere}
+.track{height:11px;background:var(--line);border-radius:6px;overflow:hidden}
+.fill{height:100%;background:var(--gold);border-radius:6px;transform-origin:right;animation:grow .9s ease-out both}
+.row.hi .fill{background:var(--navy)}
+.row.hi .name{font-weight:600}
+.pct{font-family:var(--f-mono);font-size:12.5px;text-align:left;font-variant-numeric:tabular-nums}
+@keyframes grow{from{transform:scaleX(.02)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.fill{animation:none}}
+
+.pie-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.pie{width:150px;height:150px;border-radius:50%;flex:none;position:relative}
+.pie::after{content:"";position:absolute;inset:34%;background:var(--paper);border-radius:50%}
+.legend{display:flex;flex-direction:column;gap:6px;font-size:13.5px;flex:1;min-width:150px}
+.legend div{display:grid;grid-template-columns:12px 1fr auto;gap:8px;align-items:center}
+.legend i{width:12px;height:12px;border-radius:3px}
+.legend span:last-child{font-family:var(--f-mono);font-size:12.5px}
+
+.toolbar{display:grid;grid-template-columns:auto auto;justify-content:start;gap:12px;align-items:end;padding:16px;background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-top:16px}
+@media (max-width:480px){.toolbar{grid-template-columns:1fr}.toolbar .btn{justify-content:center}.ptrigger{width:100%}}
+.picker{position:relative}
+.ptrigger{height:44px;display:inline-flex;gap:10px;align-items:center;padding:0 14px;background:var(--bg);border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;font-weight:500;color:var(--ink);cursor:pointer;min-width:230px;max-width:100%}
+.ptrigger svg{width:18px;height:18px;color:var(--gold-deep);flex:none}
+.ptrigger:hover,.ptrigger[aria-expanded="true"]{border-color:var(--gold)}
+.ptrigger:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.pop{position:absolute;top:calc(100% + 6px);right:0;z-index:20;width:min(320px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(60,45,10,.14);padding:14px;display:flex;flex-direction:column;gap:10px;color:var(--ink);font-weight:400}
+.presets{display:flex;gap:6px;flex-wrap:wrap}
+.presets button{font:inherit;font-size:12.5px;padding:4px 11px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--muted);cursor:pointer}
+.presets button:hover{border-color:var(--gold);color:var(--gold-deep)}
+.cal-head{display:flex;justify-content:space-between;align-items:center}
+.cal-head b{font-family:var(--f-display);font-weight:500;font-size:15px}
+.cal-head button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--bg);font-size:18px;line-height:1;cursor:pointer;color:var(--ink)}
+.cal-head button:hover{border-color:var(--gold);color:var(--gold-deep)}
+.dow,.days{display:grid;grid-template-columns:repeat(7,1fr);row-gap:2px}
+.dow span{text-align:center;font-size:11.5px;color:var(--muted);padding:4px 0}
+.days button{height:36px;border:0;background:none;font-family:var(--f-mono);font-size:13px;color:var(--ink);cursor:pointer;border-radius:0}
+.days button:hover{background:var(--gold-soft)}
+.days button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.days .in{background:var(--gold-soft)}
+.days .s,.days .e,.days .s:hover,.days .e:hover{background:var(--gold-deep);color:var(--on-gold)}
+.days .s{border-radius:0 8px 8px 0}.days .e{border-radius:8px 0 0 8px}.days .s.e{border-radius:8px}
+.days .today{font-weight:700;text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+.pop-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:10px;font-size:12.5px;color:var(--muted)}
+.pop-foot div{display:flex;gap:6px}
+.ghost{font:inherit;font-size:13px;background:none;border:1px solid var(--line);border-radius:8px;padding:0 12px;height:34px;cursor:pointer;color:var(--ink)}
+.btn.sm{height:34px;padding:0 14px;font-size:13px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:600;color:var(--gold-deep);min-width:0}
+.field input{font-family:var(--f-mono);font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:0 10px;height:44px;width:158px;max-width:100%;box-sizing:border-box;direction:ltr;text-align:right;accent-color:var(--gold)}
+.field input:hover{border-color:var(--gold)}
+.field input:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.btn{font:inherit;font-weight:600;font-size:14px;color:var(--on-gold);background:var(--gold-deep);border:0;border-radius:8px;padding:0 20px;height:44px;white-space:nowrap;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn:hover{background:var(--gold)}
+.btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.btn[disabled]{opacity:.7;cursor:wait}
+.btn svg{width:16px;height:16px}
+.btn.busy svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(-360deg)}}
+.status{grid-column:1 / -1;font-size:12.5px;color:var(--muted);margin:0;padding-top:10px;border-top:1px dashed var(--line)}
+.status.err{color:var(--crit)}
+.empty{padding:16px 0;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
+footer{margin-top:40px;font-size:12.5px;color:var(--muted);border-top:2px solid var(--gold);padding-top:14px}
+h3,article p{text-align:right}
+h3 a{color:inherit;text-decoration:none}
+h3 a:hover,h3 a:focus-visible{color:var(--gold-deep);text-decoration:underline;outline:none}
+.src{font-weight:500;color:var(--ink)}
+.more{font:inherit;font-size:13px;font-weight:500;color:var(--gold-deep);background:none;border:1px solid var(--line);border-radius:999px;padding:5px 16px;margin-top:12px;cursor:pointer}
+.more:hover{border-color:var(--gold)}
+.chart .sub{font-size:12px;color:var(--muted);margin:-6px 0 0}
+.chart .none{font-size:13.5px;color:var(--muted);margin:0}
+</style>
+</head>
+<body>
+<div class="wrap" dir="rtl" lang="ar">
+  <header class="top">
+    <div class="eyebrow"><span class="demo">نشرة أسبوعية</span><span id="updated"></span><button type="button" class="mode" id="mode" aria-pressed="false"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span id="modetxt">الوضع الداكن</span></button></div>
+    <h1>رادار التهديدات <span>الأسبوعي</span></h1>
+    <div class="week" id="week"></div>
+  </header>
+
+  <form class="toolbar" id="range">
+    <div class="field picker" id="picker">
+      <span id="plabel">الفترة</span>
+      <button type="button" class="ptrigger" id="ptrigger" aria-haspopup="dialog" aria-expanded="false" aria-labelledby="plabel ptext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span id="ptext"></span></button>
+      <div class="pop" id="pop" role="dialog" aria-label="اختيار الفترة" hidden>
+        <div class="presets"><button type="button" data-p="7">آخر 7 أيام</button><button type="button" data-p="30">آخر 30 يوم</button><button type="button" data-p="m">هذا الشهر</button></div>
+        <div class="cal-head"><button type="button" id="prev" aria-label="الشهر السابق">›</button><b id="mlabel"></b><button type="button" id="next" aria-label="الشهر التالي">‹</button></div>
+        <div class="dow"><span>ح</span><span>ن</span><span>ث</span><span>ر</span><span>خ</span><span>ج</span><span>س</span></div>
+        <div class="days" id="days"></div>
+        <div class="pop-foot"><span id="psel"></span><div><button type="button" class="ghost" id="pcancel">إلغاء</button><button type="button" class="btn sm" id="papply" disabled>تطبيق</button></div></div>
+      </div>
+      <input type="hidden" id="from"><input type="hidden" id="to">
+    </div>
+    <button class="btn" id="refresh" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>تحديث البيانات</button>
+    <p class="status" id="status" aria-live="polite">جاري تحميل البيانات…</p>
+  </form>
+
+  <nav class="tabs" aria-label="الأقسام">
+    <a href="#local">المحلية</a><a href="#regional">الإقليمية</a><a href="#global">العالمية</a><a href="#trends">الاتجاهات</a><a href="#sources">المصادر</a><a href="#charts">المؤشرات</a>
+  </nav>
+
+  <section id="local">
+    <div class="sec-head"><h2>أبرز الأحداث السيبرانية المحلية</h2><span class="count"></span></div>
+    <div class="items"></div>
+  </section>
+  <section id="regional">
+    <div class="sec-head"><h2>أبرز الأحداث السيبرانية الإقليمية</h2><span class="count"></span></div>
+    <div class="items"></div>
+  </section>
+  <section id="global">
+    <div class="sec-head"><h2>أبرز الأحداث السيبرانية العالمية</h2><span class="count"></span></div>
+    <div class="items"></div>
+  </section>
+
+  <section id="trends">
+    <div class="sec-head"><h2>تقييم الاتجاهات السيبرانية العالمية</h2><span class="count" id="trends-date"></span></div>
+    <div class="table-box"><table>
+      <thead><tr><th>الاتجاه</th><th>التقييم</th><th>المصدر المعتمد</th></tr></thead>
+      <tbody id="trends-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="sources">
+    <div class="sec-head"><h2>المصادر</h2></div>
+    <div class="table-box"><table>
+      <thead><tr><th>المصدر المعتمد</th><th>الرابط</th></tr></thead>
+      <tbody id="sources-body"></tbody>
+    </table></div>
+  </section>
+
+  <section id="charts">
+    <div class="sec-head"><h2>المؤشرات</h2><span class="count" id="intel-count"></span></div>
+    <div class="charts">
+      <div class="chart"><h4><b>1</b>مؤشر استهداف الهجمات السيبرانية لكل دولة</h4><p class="sub">نسبة كل دولة من الاستهدافات المرصودة</p><div class="rows" id="c1"></div></div>
+      <div class="chart"><h4><b>2</b>أساليب الهجمات السيبرانية العالمية</h4><p class="sub">نسبة كل أسلوب من التقارير</p><div class="rows" id="c2"></div></div>
+      <div class="chart"><h4><b>3</b>الجهات الأكثر نشاطاً حسب إجمالي الهجمات</h4><p class="sub">مجموعات الاختراق أو عائلات البرمجيات الخبيثة</p><div class="rows" id="c3"></div></div>
+      <div class="chart"><h4><b>4</b>القطاعات المستهدفة عالمياً</h4><p class="sub">نسبة كل قطاع من الاستهدافات</p>
+        <div class="pie-wrap" id="pie-wrap"><div class="pie" id="pie" role="img" aria-label="توزيع القطاعات المستهدفة"></div><div class="legend" id="legend"></div></div></div>
+    </div>
+  </section>
+
+  <footer>الأخبار تُجمع تلقائياً من المصادر المذكورة أعلاه كما نشرتها، ولكل خبر اسم مصدره ورابطه الأصلي. المحتوى يعبّر عن مصادره، وهذا الموقع لا يتحقق من صحته ولا يتبنّاه. المؤشرات مبنية على تقارير التهديدات المنشورة في AlienVault OTX خلال الفترة المختارة.</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const MONTHS=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+const fmt=d=>`${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const parse=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"#";
+const hm=d=>`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+
+/* Dark mode, remembered per viewer */
+(()=>{const root=document.documentElement,b=$("mode"),t=$("modetxt");
+  const set=dark=>{if(dark)root.setAttribute("data-mode","dark");else root.removeAttribute("data-mode");b.setAttribute("aria-pressed",String(dark));t.textContent=dark?"الوضع الفاتح":"الوضع الداكن";try{localStorage.setItem("radar-mode",dark?"dark":"light")}catch(e){}};
+  let saved=null;try{saved=localStorage.getItem("radar-mode")}catch(e){}
+  set(saved==="dark");b.addEventListener("click",()=>set(root.getAttribute("data-mode")!=="dark"));
+})();
+
+/* Default period: last 7 days */
+const TODAY=new Date();TODAY.setHours(0,0,0,0);
+$("to").value=iso(TODAY);$("from").value=iso(new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()-6));
+
+/* ---------- Data ---------- */
+const S={news:[],intel:[],trends:null,config:null,ex:{links:[],keywords:[]}};
+const excluded=i=>S.ex.links.includes(i.link)||S.ex.keywords.some(k=>k&&(i.title+" "+i.summary).toLowerCase().includes(k.toLowerCase()));
+const getJSON=async u=>{const r=await fetch(u,{cache:"no-cache"});if(!r.ok)throw new Error(u);return r.json()};
+const mergeNews=items=>{const m=new Map(S.news.map(i=>[i.id,i]));items.forEach(i=>m.set(i.id,i));S.news=[...m.values()].sort((a,b)=>b.date.localeCompare(a.date));};
+
+const SEV={critical:["c","حرج",0],high:["h","مرتفع",1],medium:["m","متوسط",2],low:["l","منخفض",3]};
+const RATING={"مرتفع جداً":"c","مرتفع":"h","متوسط":"m","منخفض":"l"};
+const COUNTRY={"united arab emirates":"الإمارات","saudi arabia":"السعودية","qatar":"قطر","kuwait":"الكويت","bahrain":"البحرين","oman":"عُمان","united states of america":"الولايات المتحدة","united states":"الولايات المتحدة","united kingdom of great britain and northern ireland":"المملكة المتحدة","united kingdom":"المملكة المتحدة","germany":"ألمانيا","france":"فرنسا","india":"الهند","china":"الصين","russian federation":"روسيا","russia":"روسيا","israel":"إسرائيل","iran, islamic republic of":"إيران","iran":"إيران","japan":"اليابان","korea, republic of":"كوريا الجنوبية","south korea":"كوريا الجنوبية","ukraine":"أوكرانيا","turkey":"تركيا","türkiye":"تركيا","egypt":"مصر","jordan":"الأردن","iraq":"العراق","brazil":"البرازيل","canada":"كندا","australia":"أستراليا","italy":"إيطاليا","spain":"إسبانيا","taiwan":"تايوان","taiwan, province of china":"تايوان","pakistan":"باكستان","singapore":"سنغافورة","netherlands":"هولندا","poland":"بولندا","mexico":"المكسيك","indonesia":"إندونيسيا","vietnam":"فيتنام","viet nam":"فيتنام"};
+const INDUSTRY=[[/gov/,"الحكومة"],[/financ|bank|insur/,"المالية والبنوك"],[/health|medic|pharma|hospital/,"الصحة"],[/energ|oil|gas|utilit/,"الطاقة"],[/educat|universit|academ/,"التعليم"],[/telecom/,"الاتصالات"],[/tech|software|it\b|information/,"التقنية"],[/manufact|industr/,"التصنيع"],[/defen|military|aerospace/,"الدفاع"],[/retail|e-?commerce/,"التجزئة"],[/transport|logist|aviation|shipping|maritime/,"النقل والخدمات اللوجستية"],[/media|entertain/,"الإعلام"]];
+const METHOD=[
+  ["التصيّد الاحتيالي",["T1566","T1598"],/phish|spearphish|smish/],
+  ["برامج الفدية",["T1486","T1490"],/ransom/],
+  ["استغلال الثغرات",["T1190","T1203","T1068","T1210","T1211","T1212"],/cve-|exploit|vulnerab/],
+  ["DDoS",["T1498","T1499"],/ddos|denial/],
+  ["سرقة بيانات الدخول",["T1078","T1110","T1003","T1555","T1056","T1552"],/stealer|credential|password/],
+  ["سلسلة التوريد",["T1195"],/supply.?chain/],
+  ["برمجيات خبيثة أخرى",["T1105","T1059","T1547","T1053"],/backdoor|\brat\b|trojan|loader|malware|botnet/]];
+const country=c=>COUNTRY[c.toLowerCase()]||c;
+const industry=s=>{const l=s.toLowerCase();return (INDUSTRY.find(([r])=>r.test(l))||[0,"أخرى"])[1]};
+const methods=p=>{const txt=(p.tags.join(" ")+" "+p.name).toLowerCase();const out=new Set();
+  METHOD.forEach(([n,ids,re])=>{if(p.attacks.some(a=>ids.some(id=>a.startsWith(id)))||re.test(txt))out.add(n)});return [...out]};
+
+const tally=list=>{const m=new Map();list.forEach(k=>k&&m.set(k,(m.get(k)||0)+1));const tot=[...m.values()].reduce((a,b)=>a+b,0);
+  return {tot,rows:[...m.entries()].sort((a,b)=>b[1]-a[1]).map(([n,v])=>[n,Math.round(v/tot*1000)/10])}};
+
+function bars(id,list,hi,n=7){const el=$(id);const {tot,rows}=tally(list);
+  if(!tot){el.innerHTML='<p class="none">لا توجد بيانات كافية في هذه الفترة.</p>';return}
+  const top=rows.slice(0,n),max=top[0][1];
+  el.innerHTML=top.map(([k,v])=>`<div class="row${k===hi?" hi":""}"><span class="name" dir="auto">${esc(k)}</span><div class="track"><div class="fill" style="width:${(v/max*100).toFixed(1)}%"></div></div><span class="pct">${Math.round(v)}%</span></div>`).join("");}
+
+function pie(list){const {tot,rows}=tally(list);
+  if(!tot){$("pie").style.background="var(--line)";$("legend").innerHTML='<p class="none">لا توجد بيانات كافية في هذه الفترة.</p>';return}
+  let top=rows.slice(0,5);const rest=rows.slice(5).reduce((s,r)=>s+r[1],0);if(rest)top.push(["قطاعات أخرى",rest]);
+  let pcts=top.map(r=>Math.round(r[1]));pcts[0]+=100-pcts.reduce((a,b)=>a+b,0);
+  let a=0;$("pie").style.background=`conic-gradient(${pcts.map((v,i)=>{const s=a;a+=v;return `var(--p${i+1}) ${s}% ${a}%`}).join(",")})`;
+  $("legend").innerHTML=top.map((r,i)=>`<div><i style="background:var(--p${i+1})"></i><span>${esc(r[0])}</span><span>${pcts[i]}%</span></div>`).join("");}
+
+const LIMIT=10;const expanded={};
+function render(){
+  const from=$("from").value,to=$("to").value;
+  $("week").textContent=`من ${fmt(parse(from))} إلى ${fmt(parse(to))}`;
+  const inRange=d=>{const x=d.slice(0,10);return x>=from&&x<=to};
+  const news=S.news.filter(i=>inRange(i.date)&&!excluded(i));
+  ["local","regional","global"].forEach(scope=>{
+    const sec=$(scope),list=news.filter(i=>i.scope===scope).sort((a,b)=>SEV[a.severity][2]-SEV[b.severity][2]||b.date.localeCompare(a.date));
+    sec.querySelector(".count").textContent=list.length?`${list.length} ${list.length===1?"حدث":list.length===2?"حدثان":list.length<11?"أحداث":"حدثاً"}`:"";
+    const shown=expanded[scope]?list:list.slice(0,LIMIT);
+    sec.querySelector(".items").innerHTML=list.length?shown.map(i=>{const [c,label]=SEV[i.severity];const d=new Date(i.date);
+      return `<article><i class="sev ${c}"></i><div class="meta"><span class="pill ${c}">${label}</span>${i.tag?`<span class="tag">${esc(i.tag)}</span>`:""}<span class="src">${esc(i.source)}</span><span>${d.getDate()} ${MONTHS[d.getMonth()]}</span></div><h3 dir="auto"><a href="${esc(safeUrl(i.link))}" target="_blank" rel="noopener">${esc(i.title)}</a></h3>${i.summary?`<p dir="auto">${esc(i.summary)}</p>`:"<span></span>"}</article>`}).join("")
+      +(list.length>LIMIT?`<div><button type="button" class="more" data-scope="${scope}">${expanded[scope]?"عرض أقل":`عرض الكل (${list.length})`}</button></div>`:"")
+      :'<p class="empty">لا توجد أحداث في الفترة المختارة.</p>';
+  });
+  const intel=S.intel.filter(p=>inRange(p.date));
+  $("intel-count").textContent=intel.length?`بناءً على ${intel.length} تقرير تهديد`:"";
+  bars("c1",intel.flatMap(p=>[...new Set(p.countries.map(country))]),"الإمارات");
+  bars("c2",intel.flatMap(methods),null,7);
+  bars("c3",intel.map(p=>p.adversary||p.malware[0]||""),null,6);
+  pie(intel.flatMap(p=>[...new Set(p.industries.map(industry))]));
+}
+document.addEventListener("click",ev=>{const b=ev.target.closest(".more");if(!b)return;expanded[b.dataset.scope]=!expanded[b.dataset.scope];render();});
+
+function renderStatic(){
+  const t=S.trends;
+  $("trends-body").innerHTML=t&&t.items.length?t.items.map(r=>`<tr><td>${esc(r.trend)}</td><td><span class="pill ${RATING[r.rating]||"m"}">${esc(r.rating)}</span></td><td dir="auto">${esc(r.source)}</td></tr>`).join(""):'<tr><td colspan="3">لا توجد تقييمات بعد.</td></tr>';
+  $("trends-date").textContent=t&&t.updated?`آخر مراجعة: ${fmt(parse(t.updated))}`:"";
+  const c=S.config,rows=[...c.feeds.map(f=>({name:f.name,site:f.site})),...c.references].filter((r,i,a)=>a.findIndex(x=>x.site===r.site&&x.name===r.name)===i);
+  $("sources-body").innerHTML=rows.map(r=>`<tr><td dir="auto">${esc(r.name)}</td><td><a href="${esc(safeUrl(r.site))}" target="_blank" rel="noopener">${esc(r.site.replace(/^https?:\/\/(www\.)?/,""))}</a></td></tr>`).join("");
+}
+
+const status=$("status"),btn=$("refresh");
+const setStatus=(msg,err)=>{status.textContent=msg;status.classList.toggle("err",!!err)};
+const stamp=u=>{if(!u)return;const d=new Date(u);$("updated").textContent=`آخر جمع للبيانات: ${fmt(d)}، ${hm(d)}`};
+
+async function load(){
+  try{
+    const [news,intel,trends,config,ex]=await Promise.all([getJSON("data/news.json"),getJSON("data/intel.json"),getJSON("data/trends.json"),getJSON("config.json"),getJSON("data/exclude.json").catch(()=>({links:[],keywords:[]}))]);
+    S.ex={links:ex.links||[],keywords:ex.keywords||[]};
+    S.news=news.items;S.intel=intel.items;S.trends=trends;S.config=config;stamp(news.updated);
+    renderStatic();render();
+    setStatus(news.items.length?`تم تحميل ${news.items.length} خبر من الأرشيف.`:"الأرشيف فاضي لين الحين. اضغط «تحديث البيانات» لجلب آخر الأخبار.");
+  }catch(e){setStatus("تعذّر تحميل البيانات. افتح الموقع من رابطه على Netlify، لأن الملف المحلي ما يقدر يقرأ البيانات.",true)}
+}
+
+$("range").addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  btn.disabled=true;btn.classList.add("busy");setStatus("جاري جلب آخر الأخبار من المصادر…");
+  try{
+    const r=await fetch("/.netlify/functions/latest");if(!r.ok)throw new Error(r.status);
+    const live=await r.json();const before=S.news.length;mergeNews(live.items);
+    render();const now=new Date();
+    setStatus(`تم التحديث ${hm(now)}: ${S.news.length-before} خبر جديد${live.failed?`، وتعذّر الوصول لـ ${live.failed} مصدر`:""}.`);
+  }catch(e){
+    try{const news=await getJSON("data/news.json");mergeNews(news.items);render();setStatus("تعذّر الجلب المباشر، وتم عرض آخر بيانات محفوظة.",true)}
+    catch(e2){setStatus("تعذّر الاتصال. تأكد من الإنترنت وحاول مرة ثانية.",true)}
+  }finally{btn.disabled=false;btn.classList.remove("busy")}
+});
+
+/* Range picker: one field, one calendar, click start then end */
+(()=>{
+  const same=(a,b)=>!!a&&!!b&&a.getTime()===b.getTime();
+  const label=(a,b)=>{
+    if(!a)return "اختر يوم البداية";
+    if(!b)return `من ${a.getDate()} ${MONTHS[a.getMonth()]} … اختر يوم النهاية`;
+    if(a.getFullYear()===b.getFullYear()){
+      if(a.getMonth()===b.getMonth())return same(a,b)?fmt(a):`${a.getDate()} – ${b.getDate()} ${MONTHS[b.getMonth()]} ${b.getFullYear()}`;
+      return `${a.getDate()} ${MONTHS[a.getMonth()]} – ${b.getDate()} ${MONTHS[b.getMonth()]} ${b.getFullYear()}`;
+    }
+    return `${fmt(a)} – ${fmt(b)}`;
+  };
+  let s,e,hover=null,view;
+  const pop=$("pop"),trig=$("ptrigger");
+  function paint(){
+    const endT=e||(s&&hover&&hover>=s?hover:null);
+    $("days").querySelectorAll("button[data-d]").forEach(b=>{
+      const dt=parse(b.dataset.d);
+      b.classList.toggle("s",same(dt,s));b.classList.toggle("e",same(dt,endT));
+      b.classList.toggle("in",!!(s&&endT&&dt>s&&dt<endT));
+      b.setAttribute("aria-pressed",String(same(dt,s)||same(dt,e)));
+    });
+    $("psel").textContent=label(s,e);$("papply").disabled=!(s&&e);
+  }
+  function draw(){
+    $("mlabel").textContent=`${MONTHS[view.getMonth()]} ${view.getFullYear()}`;
+    const lead=view.getDay(),n=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    let h="<span></span>".repeat(lead);
+    for(let d=1;d<=n;d++){const dt=new Date(view.getFullYear(),view.getMonth(),d);h+=`<button type="button" data-d="${iso(dt)}"${same(dt,TODAY)?' class="today"':""}>${d}</button>`;}
+    $("days").innerHTML=h;paint();
+  }
+  function open(){s=parse($("from").value);e=parse($("to").value);hover=null;view=new Date(e.getFullYear(),e.getMonth(),1);draw();pop.hidden=false;trig.setAttribute("aria-expanded","true");}
+  function close(){pop.hidden=true;trig.setAttribute("aria-expanded","false");}
+  $("ptext").textContent=label(parse($("from").value),parse($("to").value));
+  trig.addEventListener("click",()=>pop.hidden?open():close());
+  $("prev").addEventListener("click",()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);draw();});
+  $("next").addEventListener("click",()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);draw();});
+  $("days").addEventListener("click",ev=>{const b=ev.target.closest("button[data-d]");if(!b)return;const d=parse(b.dataset.d);
+    if(!s||e){s=d;e=null}else if(d<s){s=d}else{e=d}hover=null;paint();});
+  $("days").addEventListener("mouseover",ev=>{if(!s||e)return;const b=ev.target.closest("button[data-d]");if(!b)return;const d=parse(b.dataset.d);if(!same(d,hover)){hover=d;paint();}});
+  pop.querySelector(".presets").addEventListener("click",ev=>{const p=ev.target.closest("button")?.dataset.p;if(!p)return;
+    e=new Date(TODAY);s=p==="m"?new Date(TODAY.getFullYear(),TODAY.getMonth(),1):new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()-(Number(p)-1));
+    view=new Date(e.getFullYear(),e.getMonth(),1);draw();});
+  $("pcancel").addEventListener("click",()=>{close();trig.focus();});
+  $("papply").addEventListener("click",()=>{if(!(s&&e))return;$("from").value=iso(s);$("to").value=iso(e);$("ptext").textContent=label(s,e);close();trig.focus();render();});
+  document.addEventListener("pointerdown",ev=>{if(!pop.hidden&&!$("picker").contains(ev.target))close();});
+  document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!pop.hidden){close();trig.focus();}});
+})();
+
+load();
+</script>
+</body>
+</html>
