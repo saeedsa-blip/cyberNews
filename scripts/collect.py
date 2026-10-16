@@ -9,6 +9,8 @@ import json
 import os
 import re
 import sys
+import time
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -133,16 +135,56 @@ def collect_news():
         try:
             items = parse_feed(fetch(feed["url"]), feed)
             for it in items:
-                if it["id"] not in old:
+                prev = old.get(it["id"])
+                if prev is None:
                     added += 1
+                else:  # keep the Arabic translation we already made
+                    it.update({k: prev[k] for k in ("title_ar", "summary_ar") if k in prev})
                 old[it["id"]] = it
             print(f"ok   {feed['name']}: {len(items)}")
         except Exception as e:  # one bad feed must not stop the rest
             print(f"FAIL {feed['name']}: {e}", file=sys.stderr)
     cutoff = (datetime.now(timezone.utc) - timedelta(days=KEEP_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
     items = sorted((i for i in old.values() if i["date"] >= cutoff), key=lambda i: i["date"], reverse=True)
+    translate_items(items)
     save("news.json", items)
     print(f"news: {added} new, {len(items)} total")
+
+
+MAX_TRANSLATE = 1500  # per run, keeps the job short
+
+
+def translate(text):
+    """Free Google Translate web endpoint (no key). Returns Arabic or raises."""
+    url = ("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ar&dt=t&q="
+           + urllib.parse.quote(text))
+    data = json.loads(fetch(url))
+    return "".join(seg[0] for seg in data[0] if seg and seg[0]).strip()
+
+
+def translate_items(items):
+    done = fails = 0
+    for it in items:
+        if done >= MAX_TRANSLATE or fails >= 8:
+            break
+        if "title_ar" in it:
+            continue
+        if ARABIC.search(it["title"]):  # already Arabic
+            it["title_ar"], it["summary_ar"] = it["title"], it["summary"]
+            continue
+        try:
+            src = it["title"] + ("\n" + it["summary"] if it["summary"] else "")
+            out = translate(src).split("\n", 1)
+            it["title_ar"] = out[0].strip()
+            it["summary_ar"] = out[1].strip() if len(out) > 1 else ""
+            done += 1
+            fails = 0
+            time.sleep(0.2)
+        except Exception as e:
+            fails += 1
+            print(f"FAIL translate: {e}", file=sys.stderr)
+            time.sleep(2)
+    print(f"translated: {done}")
 
 
 def names(lst):
