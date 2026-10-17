@@ -42,6 +42,7 @@ function parse(xml, feed) {
       const s = decode(get(b, "source"));
       if (s) { source = s; title = title.replace(new RegExp(`\\s+-\\s+${esc(s)}$`), ""); }
       summary = "";
+      if (!has(config.relevance || [], title.toLowerCase())) return null;
     }
     if (!title || !/^https?:\/\//i.test(link) || isNaN(d)) return null;
     return {
