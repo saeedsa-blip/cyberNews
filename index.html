@@ -253,7 +253,7 @@ $("to").value=iso(TODAY);$("from").value=iso(new Date(TODAY.getFullYear(),TODAY.
 const S={news:[],intel:[],trends:null,config:null,ex:{links:[],keywords:[]}};
 const excluded=i=>S.ex.links.includes(i.link)||S.ex.keywords.some(k=>k&&(i.title+" "+i.summary).toLowerCase().includes(k.toLowerCase()));
 const getJSON=async u=>{const r=await fetch(u,{cache:"no-cache"});if(!r.ok)throw new Error(u);return r.json()};
-const mergeNews=items=>{const m=new Map(S.news.map(i=>[i.id,i]));items.forEach(i=>m.set(i.id,i));S.news=[...m.values()].sort((a,b)=>b.date.localeCompare(a.date));};
+const mergeNews=items=>{const m=new Map(S.news.map(i=>[i.id,i]));items.forEach(i=>{if(!m.has(i.id))m.set(i.id,i)});S.news=[...m.values()].sort((a,b)=>b.date.localeCompare(a.date));};
 
 const TAG_AR={"Zero-day":"ثغرة يوم الصفر","Ransomware":"فدية","Supply chain":"سلسلة التوريد","APT":"تجسس متقدم","DDoS":"حجب خدمة","AI":"ذكاء اصطناعي","Malware":"برمجيات خبيثة"};
 const SEV={critical:["c","حرج",0],high:["h","مرتفع",1],medium:["m","متوسط",2],low:["l","منخفض",3]};

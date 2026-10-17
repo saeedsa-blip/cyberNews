@@ -1,6 +1,6 @@
 """Collects cyber news (RSS) and threat intel (AlienVault OTX) into data/*.json.
 
-Runs daily from GitHub Actions. No third-party packages needed.
+Runs weekly (Sunday 07:00 UAE) from GitHub Actions. No third-party packages needed.
 OTX key comes from the OTX_API_KEY environment variable (a GitHub Secret).
 """
 import hashlib
@@ -132,14 +132,14 @@ def parse_feed(raw, feed):
 
 def collect_news():
     old = {i["id"]: i for i in load("news.json")["items"]}
-    added = 0
+    new_ids = set()
     for feed in CFG["feeds"]:
         try:
             items = parse_feed(fetch(feed["url"]), feed)
             for it in items:
                 prev = old.get(it["id"])
                 if prev is None:
-                    added += 1
+                    new_ids.add(it["id"])
                 else:  # keep the Arabic translation we already made
                     it.update({k: prev[k] for k in ("title_ar", "summary_ar") if k in prev})
                 old[it["id"]] = it
@@ -154,7 +154,7 @@ def collect_news():
                    key=lambda i: i["date"], reverse=True)
     translate_items(items)
     save("news.json", items)
-    print(f"news: {added} new, {len(items)} total")
+    print(f"news: {len(new_ids)} new, {len(items)} total")
 
 
 MAX_TRANSLATE = 1500  # per run, keeps the job short
@@ -204,10 +204,10 @@ def collect_intel():
         return
     data = load("intel.json")
     old = {i["id"]: i for i in data["items"]}
-    since = (datetime.now(timezone.utc) - timedelta(days=30 if not old else 3)).strftime("%Y-%m-%dT%H:%M:%S")
+    since = (datetime.now(timezone.utc) - timedelta(days=30 if not old else 10)).strftime("%Y-%m-%dT%H:%M:%S")  # weekly runs overlap so nothing is missed
     url = f"https://otx.alienvault.com/api/v1/pulses/subscribed?limit=50&modified_since={since}"
     pages = 0
-    while url and pages < 20:
+    while url and pages < 40:
         try:
             page = json.loads(fetch(url, {"X-OTX-API-KEY": key}))
         except Exception as e:
