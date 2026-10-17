@@ -118,6 +118,8 @@ def parse_feed(raw, feed):
             summary = ""  # Google News descriptions are just link lists
         if not (title and date and re.match(r"https?://", link or "")):
             continue
+        if "news.google.com" in feed["url"] and not has(CFG.get("relevance", []), f"{title} {summary}".lower()):
+            continue  # general news search: keep only cyber stories
         scope, sev, tag = classify(title, summary)
         out.append({
             "id": hashlib.sha1(link.encode()).hexdigest()[:12],
@@ -145,7 +147,11 @@ def collect_news():
         except Exception as e:  # one bad feed must not stop the rest
             print(f"FAIL {feed['name']}: {e}", file=sys.stderr)
     cutoff = (datetime.now(timezone.utc) - timedelta(days=KEEP_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
-    items = sorted((i for i in old.values() if i["date"] >= cutoff), key=lambda i: i["date"], reverse=True)
+    specialist = {f["name"] for f in CFG["feeds"] if "news.google.com" not in f["url"]}
+    rel = CFG.get("relevance", [])
+    items = sorted((i for i in old.values() if i["date"] >= cutoff
+                    and (i["source"] in specialist or has(rel, f"{i['title']} {i['summary']}".lower()))),
+                   key=lambda i: i["date"], reverse=True)
     translate_items(items)
     save("news.json", items)
     print(f"news: {added} new, {len(items)} total")
